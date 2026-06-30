@@ -1,4 +1,13 @@
 # FromJimToPam
+ <div align="center">  
+  
+<img src="img\FromJimToPam.jpg" alt="Logo" width="500" align="center">
+  
+
+</div>
+
+ 
+
 
 Um abridor rápido de rotinas escrito em C para Windows. A ideia é simples: você coloca todos os seus links diários, pastas ou programas em um arquivo de texto, e o executável abre tudo de uma vez sem gastar memória do computador.
 
