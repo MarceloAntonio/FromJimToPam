@@ -18,10 +18,8 @@
     }
 
     void OpenNotepad(const char *pathFile) {
-        char command[MAX_PATH_LEN];
         printf("[INFO] Abrindo editor de texto...\n");
         ShellExecuteA(NULL, "open", "notepad.exe", pathFile, NULL, SW_SHOWNORMAL);
-        
     }
 
     void FileDontFinded(const char *PathFile) {
