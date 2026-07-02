@@ -1,23 +1,17 @@
-# FromJimToPam
- <div align="center">  
-  
-<img src="img\FromJimToPam.jpg" alt="Logo" width="500" align="center">
-  
-
+<div align="center">
+  <img src="img\FromJimToPam.jpg" alt="Logo" width="500">
+  <h1>FromJimToPam</h1>
 </div>
 
- 
-
-
-Um abridor rápido de rotinas escrito em C para Windows. A ideia é simples: você coloca todos os seus links diários, pastas ou programas em um arquivo de texto, e o executável abre tudo de uma vez sem gastar memória do computador.
+Um abridor de rotinas escrito em C para Windows. A ideia é simples: você coloca os links diários, pastas ou programas em um arquivo de configuração e o executável abre tudo de uma vez.
 
 ## Como funciona
 
-O código (main.c) faz tudo de forma bem direta:
+O programa procura o arquivo `targets.conf` na pasta `%USERPROFILE%\AppData\Local\FromJimToPam\`.
 
-1. Procura o arquivo targets.conf na pasta AppData\Local\FromJimToPam\ do seu usuário.
-2. Se a pasta ou o arquivo não existirem, ele cria a estrutura automaticamente e pergunta se você já quer abrir o Bloco de Notas para colocar seus links.
-3. Quando roda normal, ele lê o arquivo linha por linha, ignora espaços em branco ou comentários que começam com #, e executa cada item usando o comando start do Windows.
+Se a pasta ou o arquivo não existirem, ele cria a estrutura básica e pergunta se você quer abrir o bloco de notas para editar a lista.
+
+Quando roda sem parâmetros, ele lê o arquivo linha por linha, ignora comentários que começam com `#` e chama a função `ShellExecuteA` do Windows para abrir cada item.
 
 ## Compilação
 
@@ -29,13 +23,32 @@ gcc main.c icone.res -o FromJimToPam.exe
 
 ## Comandos
 
-Rodar normal para abrir todos os itens da sua lista:
-```bash
-FromJimToPam.exe
+Você pode rodar o executável direto no terminal ou criar atalhos:
+
+```text
+USO:
+  FromJimToPam.exe [opcoes] [argumentos]
 ```
 
-Usar a flag de edição para abrir direto no Bloco de Notas:
-```bash
-FromJimToPam.exe -e
+### Opções disponíveis
+
+| Opção | Argumentos | Descrição | Exemplo |
+| :--- | :--- | :--- | :--- |
+| *(sem flag)* | N/A | Executa todos os itens da lista | `FromJimToPam.exe` |
+| **`-a`** | `<alvo1> [alvo2]` | Adiciona novos itens pelo terminal | `FromJimToPam.exe -a "https://github.com"` |
+| **`-l`** | N/A | Lista os itens numerados | `FromJimToPam.exe -l` |
+| **`-r`** | `<id1> [id2]` | Remove itens pelos números de índice | `FromJimToPam.exe -r 2 4` |
+| **`-e`** | N/A | Abre o arquivo `targets.conf` no editor | `FromJimToPam.exe -e` |
+| **`-h`** | N/A | Mostra os comandos disponíveis | `FromJimToPam.exe -h` |
+
+## Formato do arquivo (`targets.conf`)
+
+O arquivo aceita links da internet, diretórios ou executáveis locais. Coloque um item por linha:
+
+```text
+# Minhas rotinas
+https://mail.google.com
+https://github.com
+C:\Program Files\Spotify\Spotify.exe
 ```
 
